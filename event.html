@@ -236,6 +236,7 @@ legend{margin-bottom:.7rem;color:var(--gold);font-family:var(--serif)}
 .adm .panel{position:relative;width:min(960px,100%);max-height:90vh;overflow:auto;background:var(--night);border:1px solid var(--gold);padding:2rem}
 .adm .x{position:absolute;right:14px;top:10px;font-size:1.4rem;color:var(--mist);cursor:pointer;background:none;border:0}
 .adm h3{font-size:1.5rem;margin-bottom:1rem}.adm input{display:block;width:100%;max-width:320px;margin-bottom:1rem;padding:.8rem 1rem;font:inherit;color:var(--ivory);background:rgba(255,255,255,.06);border:1px solid var(--line)}
+.atools{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.4rem}.atools .btn{padding:.7rem 1.2rem;font-size:.95rem}.btn.dng{border-color:#d86a6a;color:#ffb4b4}.btn.dng:disabled{opacity:.4;pointer-events:none}.btn.dng:not(:disabled){background:rgba(216,80,80,.18)}.adm input[type=checkbox]{display:inline-block;width:18px;height:18px;margin:0;accent-color:var(--crimson)}
 .adm .tw{overflow-x:auto;margin-top:1rem}.adm table{border-collapse:collapse;width:100%;min-width:640px;font-size:1rem}
 .adm th,.adm td{padding:.6rem .7rem;border-bottom:1px solid rgba(216,180,107,.2);text-align:left;vertical-align:top;word-break:break-all}.adm th{color:var(--gold);font-weight:400}
 .lb{position:fixed;inset:0;z-index:90;background:rgba(3,4,14,.94);display:grid;place-items:center;padding:20px;cursor:zoom-out}.lb[hidden]{display:none}.lb img{max-height:94vh;max-width:94vw;box-shadow:0 0 100px rgba(165,34,47,.5)}
@@ -505,7 +506,7 @@ legend{margin-bottom:.7rem;color:var(--gold);font-family:var(--serif)}
 
 <div class="adm" id="adm" hidden role="dialog" aria-label="신청자 보기"><div class="panel"><button class="x" id="admClose" aria-label="닫기">✕</button>
 <form id="admLogin"><h3>관리자 확인</h3><input type="password" id="admPw" autocomplete="off" placeholder="비밀번호"><button class="btn fill" type="submit">열기</button><p id="admMsg" class="msg"></p></form>
-<div id="admList" hidden><h3>신청한 사람</h3><p id="admCount" class="msg"></p><button class="btn" id="admCopy" type="button">엑셀용으로 복사</button><div class="tw"><table><thead><tr><th>시간</th><th>구분</th><th>이름</th><th>연락처</th><th>내용</th></tr></thead><tbody id="admBody"></tbody></table></div></div></div></div>
+<div id="admList" hidden><h3>신청한 사람</h3><p id="admCount" class="msg"></p><div class="atools"><button class="btn fill" id="admCsv" type="button">CSV 내려받기</button><button class="btn" id="admCopy" type="button">엑셀용으로 복사</button><button class="btn dng" id="admDel" type="button" disabled>선택 삭제</button></div><div class="tw"><table><thead><tr><th><input type="checkbox" id="admAll" aria-label="전체 선택"></th><th>시간</th><th>구분</th><th>이름</th><th>연락처</th><th>내용</th></tr></thead><tbody id="admBody"></tbody></table></div></div></div></div>
 <div class="lb" id="lb" hidden><img alt="" id="lbImg"></div>
 
 <script>
@@ -574,6 +575,7 @@ addEventListener('scroll',prizeOpen,{passive:true});prizeOpen();
 
 
 
+
 const SB='https://qbneluazccrhvvsfgemm.supabase.co',KEY='sb_publishable_OcAkZvg5rZZHX3K24ppMVw_1ghfIQBh',HD={apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'};
 $('#joinForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=$('#formMsg'),b=f.querySelector('button');
  if(!f.name.value.trim()||!f.tel.value.trim()){m.textContent='이름과 연락처를 입력해 주세요.';return}
@@ -586,14 +588,31 @@ $('#joinForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.
 /* ── 관리자: 제목을 5번 누르면 열림 ── */
 let hc=0,ht;$('.htxt h1').addEventListener('click',()=>{hc++;clearTimeout(ht);ht=setTimeout(()=>hc=0,2500);if(hc>=5){hc=0;$('#adm').hidden=false;$('#admPw').focus()}});
 const esc=v=>String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));let rows=[];
-$('#admClose').addEventListener('click',()=>{$('#adm').hidden=true;$('#admList').hidden=true;$('#admLogin').hidden=false;$('#admPw').value='';rows=[]});
+$('#admClose').addEventListener('click',()=>{$('#adm').hidden=true;$('#admList').hidden=true;$('#admLogin').hidden=false;$('#admPw').value='';rows=[];admPw='';sel.clear()});
+let admPw='',sel=new Set();
+const kt=x=>new Date(x.created_at).toLocaleString('ko-KR');
+function draw(note){
+ $('#admCount').textContent=`총 ${rows.length}건`+(note?' · '+note:'');
+ $('#admBody').innerHTML=rows.map(x=>`<tr><td><input type="checkbox" class="rc" data-id="${x.id}" aria-label="선택"${sel.has(x.id)?' checked':''}></td><td>${kt(x)}</td><td>${esc(x.kind)}</td><td>${esc(x.name)}</td><td>${esc(x.tel)}</td><td>${esc(x.msg)}</td></tr>`).join('')||'<tr><td colspan="6">아직 신청이 없어요.</td></tr>';
+ $('#admAll').checked=rows.length>0&&sel.size===rows.length;$('#admDel').textContent=sel.size?`선택 삭제 (${sel.size})`:'선택 삭제';$('#admDel').disabled=!sel.size}
 $('#admLogin').addEventListener('submit',async e=>{e.preventDefault();const m=$('#admMsg');m.textContent='확인 중…';
- try{const r=await fetch(SB+'/rest/v1/rpc/xmas_list',{method:'POST',headers:HD,body:JSON.stringify({pw:$('#admPw').value})});if(!r.ok)throw 0;rows=await r.json();
-  $('#admLogin').hidden=true;$('#admList').hidden=false;$('#admCount').textContent=`총 ${rows.length}건`;
-  $('#admBody').innerHTML=rows.map(x=>`<tr><td>${new Date(x.created_at).toLocaleString('ko-KR')}</td><td>${esc(x.kind)}</td><td>${esc(x.name)}</td><td>${esc(x.tel)}</td><td>${esc(x.msg)}</td></tr>`).join('')||'<tr><td colspan="5">아직 신청이 없어요.</td></tr>';m.textContent=''}
+ try{const r=await fetch(SB+'/rest/v1/rpc/xmas_list',{method:'POST',headers:HD,body:JSON.stringify({pw:$('#admPw').value})});if(!r.ok)throw 0;rows=await r.json();admPw=$('#admPw').value;sel.clear();
+  $('#admLogin').hidden=true;$('#admList').hidden=false;draw();m.textContent=''}
  catch(_){m.textContent='비밀번호가 맞지 않아요.'}});
-$('#admCopy').addEventListener('click',async()=>{const t=['시간\t구분\t이름\t연락처\t내용',...rows.map(x=>[new Date(x.created_at).toLocaleString('ko-KR'),x.kind,x.name,x.tel,(x.msg||'').replace(/\s+/g,' ')].join('\t'))].join('\n');
- try{await navigator.clipboard.writeText(t);$('#admCount').textContent=`총 ${rows.length}건 · 복사했어요 (엑셀에 붙여 넣기)`}catch(_){$('#admCount').textContent='복사가 막혀 있어요. 표를 직접 선택해 복사해 주세요.'}});
+$('#admBody').addEventListener('change',e=>{const c=e.target.closest('.rc');if(!c)return;const id=+c.dataset.id;c.checked?sel.add(id):sel.delete(id);draw()});
+$('#admAll').addEventListener('change',e=>{sel=e.target.checked?new Set(rows.map(x=>x.id)):new Set();draw()});
+let dt;$('#admDel').addEventListener('click',async()=>{const b=$('#admDel');
+ if(!b.dataset.ask){b.dataset.ask=1;b.textContent=`정말 ${sel.size}건 삭제? 한 번 더 누르세요`;clearTimeout(dt);dt=setTimeout(()=>{delete b.dataset.ask;draw()},4000);return}
+ clearTimeout(dt);delete b.dataset.ask;b.disabled=true;
+ try{const ids=[...sel],r=await fetch(SB+'/rest/v1/rpc/xmas_delete',{method:'POST',headers:HD,body:JSON.stringify({pw:admPw,ids})});if(!r.ok)throw 0;const n=await r.json();
+  rows=rows.filter(x=>!sel.has(x.id));sel.clear();draw(`${n}건 삭제했어요`)}
+ catch(_){draw('삭제에 실패했어요. 다시 시도해 주세요.')}});
+$('#admCsv').addEventListener('click',()=>{const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+ const t='﻿'+['시간,구분,이름,연락처,내용',...rows.map(x=>[kt(x),x.kind,x.name,x.tel,x.msg].map(q).join(','))].join('\r\n');
+ const a=document.createElement('a'),d=new Date(),z=n=>String(n).padStart(2,'0');a.href=URL.createObjectURL(new Blob([t],{type:'text/csv;charset=utf-8'}));a.download=`신청자_${d.getFullYear()}${z(d.getMonth()+1)}${z(d.getDate())}.csv`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);draw('CSV 파일을 내려받았어요')});
+$('#admCopy').addEventListener('click',async()=>{const t=['시간\t구분\t이름\t연락처\t내용',...rows.map(x=>[kt(x),x.kind,x.name,x.tel,(x.msg||'').replace(/\s+/g,' ')].join('\t'))].join('\n');
+ try{await navigator.clipboard.writeText(t);draw('복사했어요 (엑셀에 붙여 넣기)')}catch(_){draw('복사가 막혀 있어요. 표를 직접 선택해 복사해 주세요.')}});
+
 
 
 
