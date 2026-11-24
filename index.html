@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>서설 출판사</title>
-<meta name="description" content="서설 출판사 프리뷰 전시. 아직 책이 되지 못한 책 네 권을 먼저 만나는 겨울.">
+<meta name="description" content="서설 출판사 프리뷰. 아직 책이 되지 못한 책 네 권을 먼저 만나는 겨울.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500&family=IBM+Plex+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@200;300;500;700;900&display=swap" rel="stylesheet">
@@ -74,7 +74,7 @@ nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;justify-content:spac
 .scrollcue{position:absolute;left:var(--gutter);bottom:26px;display:flex;align-items:center;gap:.9rem;font-family:var(--latin);font-style:italic;font-size:1.15rem;color:var(--frost);animation:fadein 1.4s 3s both}
 .scrollcue i{display:block;width:1px;height:54px;background:linear-gradient(var(--frost),transparent);transform-origin:top;animation:drip 2.2s ease-in-out infinite}
 @keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
-@media(max-width:820px){.hero-hanja{opacity:.5;right:-2vw}.hero .seal{top:auto;bottom:14%;right:8%}}
+@media(max-width:820px){.hero-hanja{font-size:clamp(7rem,40vw,12rem);opacity:.42;top:30%;right:-1vw}.hero .seal{top:auto;bottom:4%;right:6%;width:48px;font-size:1.2rem}}
 
 /* 흐르는 문장 */
 .marquee{overflow:hidden;border-block:1px solid rgba(185,200,228,.22);background:rgba(23,29,72,.55)}
@@ -115,25 +115,74 @@ h2{font-size:clamp(2rem,4.2vw,3.7rem);margin-bottom:1.8rem}
 @media(max-width:800px){.indie .grid{grid-template-columns:1fr}.rows div{grid-template-columns:1fr;gap:.2rem}}
 
 /* 프리뷰 전시 */
-.expo .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:start}
+.expo .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:start;margin-top:clamp(56px,7vw,110px)}
 .stage{position:sticky;top:15vh;min-height:min(500px,80vw);display:grid;place-items:center;align-content:center;perspective:1700px;padding:20px 0}
-.book{--p:0;width:min(290px,40vw);aspect-ratio:3/4;position:relative;transform-style:preserve-3d;container-type:inline-size;
+.book3d{--p:0;margin-inline:auto;width:min(290px,40vw);aspect-ratio:3/4;position:relative;transform-style:preserve-3d;container-type:inline-size;
   transform:translateX(calc(var(--p) * 50%)) rotateX(calc(9deg - var(--p) * 5deg)) rotateY(calc(-18deg + var(--p) * 18deg))}
-.book .page{position:absolute;inset:0;background:#f1ede4;color:#1a1d33;padding:9cqw 8cqw;box-shadow:inset 6px 0 14px rgba(0,0,0,.18),0 30px 60px rgba(0,0,0,.45);font-family:var(--serif)}
-.book .page p{font-size:7.4cqw;line-height:1.85;font-weight:300;max-width:none}
-.book .page small{display:block;margin-top:7cqw;font-size:5cqw;color:#4a5072;font-family:var(--sans)}
-.book .cover{position:absolute;inset:0;transform-origin:left center;transform-style:preserve-3d;transform:rotateY(calc(var(--p) * -178deg))}
-.book .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.book .face.back{transform:rotateY(180deg);background:#e8e3d7;color:#1a1d33;display:grid;place-items:center;text-align:center;font-family:var(--serif);padding:8cqw}
-.book .face.back b{display:block;font-weight:500;font-size:8.4cqw;margin-bottom:3cqw}
-.book .face.back span{font-size:5.2cqw;color:#4a5072;font-family:var(--sans);line-height:1.7}
+.book3d .page{position:absolute;inset:0;background:#f1ede4;color:#1a1d33;padding:9cqw 8cqw;box-shadow:inset 6px 0 14px rgba(0,0,0,.18),0 30px 60px rgba(0,0,0,.45);font-family:var(--serif)}
+.book3d .page p{font-size:7.4cqw;line-height:1.85;font-weight:300;max-width:none}
+.book3d .page small{display:block;margin-top:7cqw;font-size:5cqw;color:#4a5072;font-family:var(--sans)}
+.book3d .cover{position:absolute;inset:0;transform-origin:left center;transform-style:preserve-3d;transform:rotateY(calc(var(--p) * -178deg))}
+.book3d .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.book3d .face.back{transform:rotateY(180deg);background:#e8e3d7;color:#1a1d33;display:grid;place-items:center;text-align:center;font-family:var(--serif);padding:8cqw}
+.book3d .face.back b{display:block;font-weight:500;font-size:8.4cqw;margin-bottom:3cqw}
+.book3d .face.back span{font-size:5.2cqw;color:#4a5072;font-family:var(--sans);line-height:1.7}
 .cap{margin-top:1.6rem;font-size:1.05rem;color:var(--frost);text-align:center;font-family:var(--latin);font-style:italic;font-size:1.25rem}
-.rooms{margin-top:2.4rem;border-top:1px solid rgba(185,200,228,.35);counter-reset:r}
+.expo-head{scroll-margin-top:96px}
+#rooms{scroll-margin-top:120px}
+.rooms{margin-top:0;border-top:1px solid rgba(185,200,228,.35);counter-reset:r}
 .rooms li{list-style:none;display:grid;grid-template-columns:2.4em 1fr;gap:.4rem 1rem;padding:1.3rem 0;border-bottom:1px solid rgba(185,200,228,.35);counter-increment:r}
 .rooms li::before{content:counter(r);font-family:var(--latin);font-style:italic;font-size:1.9rem;color:var(--seal);line-height:1.2}
 .rooms strong{font-family:var(--serif);font-weight:500;display:block;font-size:1.25rem}
-.rooms span{color:var(--frost);font-size:1.05rem}
+.rooms span{color:var(--frost);font-size:1.08rem}
+.rooms small{display:block;font-size:.95rem;color:var(--frost);letter-spacing:.08em;margin-bottom:.15rem}
+.rooms strong{font-size:1.45rem!important;line-height:1.4;margin-bottom:.45rem}
+.rooms li.end{grid-template-columns:1fr;border-bottom:0;padding-top:1.8rem}
+.rooms li.end::before{content:none}
+.rooms li.end span{font-family:var(--serif);font-size:1.3rem;color:var(--snow);line-height:1.7}
+
 @media(max-width:860px){.expo .grid{grid-template-columns:1fr}.stage{position:relative;top:0;order:-1}}
+
+
+/* 배너: Unboxing Christmas */
+.banner{display:grid;grid-template-columns:1fr 1fr;margin-top:clamp(36px,5vw,64px);border:1px solid rgba(185,200,228,.32);background:var(--ink-2);overflow:hidden}
+.b-text{padding:clamp(28px,5vw,76px);display:flex;flex-direction:column;justify-content:center;gap:1.5rem;align-items:flex-start}
+.b-eyebrow{font-size:.98rem;letter-spacing:.22em;color:var(--frost);font-weight:500}
+.b-eyebrow span{color:var(--seal);margin:0 .7em}
+.b-title{font-family:var(--latin);font-style:italic;font-weight:500;font-size:clamp(3.4rem,7.4vw,6.6rem);line-height:.98;letter-spacing:-.01em}
+.b-desc{color:var(--frost);font-size:1.12rem;line-height:1.95}
+.b-btn{display:inline-flex;gap:.7em;align-items:center;margin-top:.4rem}
+.b-btn svg{transition:transform .35s}
+.b-btn:hover svg{transform:translate(3px,-3px)}
+.b-art{position:relative;min-height:clamp(360px,42vw,580px);background:radial-gradient(70% 70% at 50% 45%,#2c3688 0%,#171d48 55%,#0e1330 100%);display:grid;place-items:center;overflow:hidden;border-left:1px solid rgba(185,200,228,.2)}
+.b-art svg{width:min(100%,540px);height:auto;display:block}
+.b-cap{position:absolute;right:clamp(14px,2vw,28px);bottom:clamp(12px,1.6vw,22px);font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--frost)}
+.ring,.sp,.lid,.b-art .book,.aglow,.fl{transform-box:fill-box;transform-origin:center}
+.par1,.par2{transition:transform .3s ease-out}
+.par1{transform:translate(calc(var(--px,0) * -10px),calc(var(--py,0) * -10px))}
+.par2{transform:translate(calc(var(--px,0) * 8px),calc(var(--py,0) * 8px))}
+.ring{animation:spin 70s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sp{opacity:.25;animation:tw 3.4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.2;transform:scale(.55) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(20deg)}}
+.fl{animation:fl 6s ease-in-out infinite;opacity:0}
+@keyframes fl{0%{opacity:0;transform:translateY(-10px)}30%{opacity:.9}100%{opacity:0;transform:translateY(60px)}}
+.lid{transform:translate(calc(var(--lid,0) * 136px),calc(var(--lid,0) * 64px - var(--lift,0) * 1px)) rotate(calc(var(--lid,0) * 72deg)) scale(calc(1 - var(--lid,0) * .25))}
+.b-art .book{transform:translateY(calc(var(--bk,0) * -158px)) rotate(calc(var(--bk,0) * -3deg))}
+.bob{animation:bob 4.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.beam{opacity:calc(var(--bk,0) * .9)}
+.aglow{opacity:calc(.2 + var(--o,0) * .8);transform:scale(calc(.9 + var(--o,0) * .25))}
+
+.banner-pin{margin-top:clamp(36px,5vw,64px)}
+.banner-pin .banner{margin-top:0}
+@media(min-width:861px) and (min-height:700px){
+  .banner-pin{height:210vh}
+  .banner-pin .banner{position:sticky;top:clamp(72px,calc(50vh - 295px),140px)}
+}
+.b-hint{position:absolute;left:0;right:0;text-align:center;top:clamp(14px,2vw,26px);font-family:var(--latin);font-style:italic;font-size:1.2rem;color:var(--frost);opacity:calc(1 - var(--o,0) * 8)}
+.b-art:not(.play) *{animation-play-state:paused}
+@media(max-width:860px){.banner{grid-template-columns:1fr}.b-art{border-left:0;border-top:1px solid rgba(185,200,228,.2)}}
 
 /* 출간 예정 */
 .titles{background:linear-gradient(var(--ink),var(--ink-2))}
@@ -215,6 +264,12 @@ dialog[open]{animation:dlg .5s cubic-bezier(.2,.8,.2,1)}
 .x{position:absolute;right:14px;top:10px;font-size:2rem;line-height:1;padding:.2em .4em}
 @media(max-width:680px){.dgrid{grid-template-columns:1fr}.dgrid .cov{max-width:210px}}
 
+@media(max-width:560px){
+  .b-eyebrow{letter-spacing:.12em;font-size:.88rem}
+  .hero .btns .btn{width:100%;text-align:center}
+  .mail code{font-size:clamp(1.02rem,5vw,1.6rem);word-break:normal;overflow-wrap:anywhere}
+  .book3d{width:min(290px,43vw)}
+}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -231,7 +286,7 @@ dialog[open]{animation:dlg .5s cubic-bezier(.2,.8,.2,1)}
   <a class="logo" href="#top">서설 <small>Seoseol Press</small></a>
   <div class="menu">
     <a href="#about">서설이란</a>
-    <a href="#expo">프리뷰 전시</a>
+    <a href="#expoHead">체험 존</a>
     <a href="#titles">출간 예정</a>
     <a href="#log">서설 일지</a>
     <a class="cta" href="#reserve">첫 독자 되기</a>
@@ -248,14 +303,9 @@ dialog[open]{animation:dlg .5s cubic-bezier(.2,.8,.2,1)}
         <span class="ln">첫 문장 위로,</span>
         <span class="ln">눈이 내립니다.</span>
       </h1>
-      <p class="lead fade">서설 출판사의 프리뷰 전시.<br>책이 되기 전의 책을 먼저 만나는 겨울입니다.</p>
-      <dl class="fade">
-        <dt>일시</dt><dd id="evDate">2026년 12월 · 세부 일정 공개 예정</dd>
-        <dt>장소</dt><dd id="evPlace">광주 · 장소 공개 예정</dd>
-        <dt>전시</dt><dd>미출간 도서 네 권의 표지 시안 · 첫 문장 · 시험 제본본</dd>
-      </dl>
+      <p class="lead fade">서설 출판사 프리뷰.<br>책이 되기 전의 책을 먼저 읽고, 만지고, 고르는 겨울입니다.</p>
       <div class="btns fade">
-        <a class="btn fill" href="#expo">전시 둘러보기</a>
+        <a class="btn fill" href="#expoHead">전시 둘러보기</a>
         <a class="btn" href="#reserve">첫 독자 예약 카드 만들기</a>
       </div>
     </div>
@@ -286,7 +336,7 @@ dialog[open]{animation:dlg .5s cubic-bezier(.2,.8,.2,1)}
         <p>겨울의 첫머리에 내려 이듬해의 좋은 일을 알린다는 눈입니다.</p>
       </div>
     </div>
-    <p class="so scrub">둘 다 시작을 알립니다. 우리는 아직 한 권도 내지 못했습니다. 그래서 첫 전시의 이름을 서설이라 지었습니다. 책보다 먼저, 책이 될 문장들이 내리는 자리입니다.</p>
+    <p class="so scrub">둘 다 시작을 알립니다. 우리는 아직 한 권도 내지 못했습니다. 그래서 첫 프리뷰의 이름을 서설이라 지었습니다. 책보다 먼저, 책이 될 문장들이 내리는 자리입니다.</p>
   </div>
 </section>
 
@@ -300,37 +350,104 @@ dialog[open]{animation:dlg .5s cubic-bezier(.2,.8,.2,1)}
     <dl class="rows rv">
       <div><dt>적은 부수로</dt><dd>대량으로 찍지 않습니다. 한 권을 읽을 사람을 먼저 만나고 부수를 정합니다.</dd></div>
       <div><dt>작가와 같은 책상에서</dt><dd>원고가 책이 되는 모든 단계를 작가와 함께 정합니다. 표지도 문장도 마찬가지입니다.</dd></div>
-      <div><dt>독자에게 직접</dt><dd>서점에 놓이기 전에 전시와 예약으로 독자를 만납니다. 첫 독자의 선택이 첫 인쇄가 됩니다.</dd></div>
+      <div><dt>독자에게 직접</dt><dd>서점에 놓이기 전에 체험 존과 예약으로 독자를 만납니다. 첫 독자의 선택이 첫 인쇄가 됩니다.</dd></div>
     </dl>
   </div>
 </section>
 
 <section class="expo pad" id="expo">
-  <div class="wrap grid">
-    <div>
+  <div class="wrap">
+    <div class="expo-head" id="expoHead">
       <p class="kicker">Preview exhibition</p>
       <h2 class="rv">책이 없는 전시,<br>책이 되는 순간을 봅니다.</h2>
-      <p class="rv">아직 인쇄된 책은 없습니다. 대신 표지 시안, 첫 문장, 시험 제본한 첫 몇 쪽이 있습니다. 완성된 책을 구경하는 전시가 아니라, 책이 되기 전의 책에 의견을 보태는 전시입니다.</p>
-      <ol class="rooms rv">
-        <li><div><strong>표지 시안 벽</strong><span>네 권의 표지 시안을 한 벽에서 비교하고, 마음에 드는 쪽에 스티커를 붙입니다.</span></div></li>
-        <li><div><strong>첫 문장 뽑기</strong><span>상자에서 한 문장을 뽑아 엽서로 가져갑니다.</span></div></li>
-        <li><div><strong>샘플 열람대</strong><span>시험 제본본의 첫 몇 쪽을 읽고 메모를 남깁니다.</span></div></li>
-        <li><div><strong>첫 독자 예약</strong><span>마음에 든 책의 예약 카드를 받습니다. 책이 나오면 가장 먼저 연락드립니다.</span></div></li>
-      </ol>
+      <p class="rv">아직 인쇄된 책은 없습니다. 대신 표지 시안과 첫 문장, 시험 제본한 첫 몇 쪽이 있습니다. 완성된 책을 구경하는 곳이 아니라, 책이 되어 가는 과정을 직접 읽고 만지고 고르는 체험 존입니다. 여러분이 고른 한 권이 서설의 첫 책이 됩니다.</p>
     </div>
-    <div class="stage">
-      <div>
-        <div class="book" id="book" aria-label="시험 제본본 미리보기">
-          <div class="page">
-            <p>겨울의 첫눈은 소리가 없다.<br>그래서 우리는 눈이 온 줄도 모르고 한참 책상 앞에 앉아 있었다.</p>
-            <small>《겨울의 문장들》 가제 · 시험 제본 첫 쪽</small>
+
+    <div class="banner-pin" id="bpin">
+    <article class="banner" id="banner">
+      <div class="b-text">
+        <p class="b-eyebrow">SEOSEOL PRESS<span>●</span>PREVIEW EXHIBITION</p>
+        <h3 class="b-title">Unboxing<br>Christmas</h3>
+        <p class="b-desc">당신에게 가장 특별한 선물은 무엇인가요?<br>루돌프와 눈사람, 산타의 이야기를 따라가며<br>내 안의 새로운 면을 발견하는 체험형 프리뷰 전시.</p>
+        <a class="btn fill b-btn" href="#rooms">체험 존 자세히 보기
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7"/></svg>
+        </a>
+      </div>
+      <div class="b-art" id="bart" aria-hidden="true">
+        <svg viewBox="0 0 400 400" role="presentation">
+          <defs>
+            <radialGradient id="gl" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f3f6fb" stop-opacity=".55"/><stop offset="1" stop-color="#f3f6fb" stop-opacity="0"/></radialGradient>
+            <linearGradient id="bd" x1="0" x2="1"><stop offset="0" stop-color="#2d3790"/><stop offset="1" stop-color="#171d48"/></linearGradient>
+            <linearGradient id="ld" x1="0" x2="1"><stop offset="0" stop-color="#3f4cb3"/><stop offset="1" stop-color="#232c6b"/></linearGradient>
+            <linearGradient id="bkc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a3580"/><stop offset="1" stop-color="#0b0f2a"/></linearGradient>
+            <linearGradient id="beam" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#f3f6fb" stop-opacity=".55"/><stop offset="1" stop-color="#f3f6fb" stop-opacity="0"/></linearGradient>
+            <path id="st" d="M0,-10 Q0,0 10,0 Q0,0 0,10 Q0,0 -10,0 Q0,0 0,-10Z"/>
+          </defs>
+          <g class="par1">
+            <circle cx="200" cy="200" r="172" fill="none" stroke="#b9c8e4" stroke-opacity=".28"/>
+            <circle class="ring" cx="200" cy="200" r="142" fill="none" stroke="#b9c8e4" stroke-opacity=".4" stroke-dasharray="2 7"/>
+            <g transform="translate(62 112) scale(1.5)"><use href="#st" class="sp" fill="#f3f6fb" style="animation-delay:0s"/></g>
+            <g transform="translate(346 150) scale(.9)"><use href="#st" class="sp" fill="#f3f6fb" style="animation-delay:1.2s"/></g>
+            <g transform="translate(318 338) scale(1.1)"><use href="#st" class="sp" fill="#f3f6fb" style="animation-delay:2.1s"/></g>
+            <g transform="translate(84 318) scale(.8)"><use href="#st" class="sp" fill="#f3f6fb" style="animation-delay:.7s"/></g>
+            <g transform="translate(250 54) scale(.7)"><use href="#st" class="sp" fill="#f3f6fb" style="animation-delay:1.7s"/></g>
+            <circle class="fl" cx="120" cy="90" r="2.2" fill="#f3f6fb"/>
+            <circle class="fl" cx="290" cy="110" r="1.8" fill="#f3f6fb" style="animation-delay:1.4s"/>
+            <circle class="fl" cx="80" cy="220" r="1.6" fill="#f3f6fb" style="animation-delay:2.6s"/>
+            <circle class="fl" cx="335" cy="250" r="2.4" fill="#f3f6fb" style="animation-delay:.8s"/>
+            <circle class="fl" cx="200" cy="60" r="1.6" fill="#f3f6fb" style="animation-delay:3.2s"/>
+          </g>
+          <g class="par2">
+            <ellipse cx="200" cy="346" rx="108" ry="12" fill="#000" opacity=".4"/>
+            <circle class="aglow" cx="200" cy="215" r="105" fill="url(#gl)"/>
+            <polygon class="beam" points="140,236 260,236 300,40 100,40" fill="url(#beam)"/>
+            <g class="book"><g class="bob">
+              <rect x="152" y="215" width="96" height="118" fill="url(#bkc)" stroke="#b9c8e4" stroke-opacity=".6"/>
+              <rect x="152" y="215" width="7" height="118" fill="#0b0f2a" opacity=".55"/>
+              <circle cx="228" cy="236" r="7" fill="#eef2fb"/>
+              <text x="170" y="262" fill="#f3f6fb" font-size="12" font-style="italic" font-family="Cormorant Garamond, serif">Seoseol</text>
+              <text x="170" y="310" fill="#f3f6fb" font-size="15" font-family="Noto Serif KR, serif" font-weight="300">첫 문장</text>
+              <rect x="224" y="310" width="14" height="14" fill="#c63a2f"/>
+            </g></g>
+            <rect x="110" y="236" width="180" height="100" fill="url(#bd)" stroke="#b9c8e4" stroke-opacity=".55"/>
+            <rect x="186" y="236" width="28" height="100" fill="#c63a2f"/>
+            <rect x="110" y="236" width="8" height="100" fill="#fff" opacity=".07"/>
+            <g class="lid">
+              <rect x="100" y="204" width="200" height="34" fill="url(#ld)" stroke="#b9c8e4" stroke-opacity=".6"/>
+              <rect x="186" y="204" width="28" height="34" fill="#c63a2f"/>
+              <ellipse cx="177" cy="192" rx="23" ry="12" transform="rotate(-24 177 192)" fill="none" stroke="#c63a2f" stroke-width="7"/>
+              <ellipse cx="223" cy="192" rx="23" ry="12" transform="rotate(24 223 192)" fill="none" stroke="#c63a2f" stroke-width="7"/>
+              <circle cx="200" cy="199" r="9" fill="#c63a2f"/>
+            </g>
+          </g>
+        </svg>
+        <span class="b-hint">스크롤해서 열어 보세요</span>
+        <span class="b-cap">A Christmas preview experience</span>
+      </div>
+    </article>
+    </div>
+
+    <div class="grid" id="expoGrid">
+      <ol class="rooms rv" id="rooms">
+        <li><div><strong>《빨간 코가 부끄러운 루돌프》</strong><span>자기의 빨간 코가 부끄러워 시무룩해진 루돌프. 과연 자신감을 얻을 수 있을까요?</span></div></li>
+        <li><div><strong>《녹아내린 눈사람》</strong><span>봄이 되면 다 녹아버릴까 봐 두려워하며 웃음을 잃어버린 눈사람. 과연 다시 웃을 수 있을까요?</span></div></li>
+        <li><div><strong>《산타의 책장》</strong><span>산타의 자루에는 선물 대신 책 속 한 줄이 들어 있어요. 오늘 당신이 뽑을 한 줄은 무엇일까요?</span></div></li>
+        <li class="end"><div><span>세 권을 모두 읽고 나면, 이제 당신의 첫 문장을 쓸 차례입니다.</span></div></li>
+      </ol>
+      <div class="stage">
+        <div>
+          <div class="book3d" id="book" aria-label="시험 제본본 미리보기">
+            <div class="page">
+              <p>겨울의 첫눈은 소리가 없다.<br>그래서 우리는 눈이 온 줄도 모르고 한참 책상 앞에 앉아 있었다.</p>
+              <small>《겨울의 문장들》 가제 · 시험 제본 첫 쪽</small>
+            </div>
+            <div class="cover">
+              <div class="face front"><div class="cov c1" style="width:100%;height:100%;aspect-ratio:auto;box-shadow:none"><div class="moon"></div><div class="s">Seoseol Press</div><div class="t">겨울의 문장들</div></div></div>
+              <div class="face back"><div><b>서설 출판사</b><span>프리뷰 시험 제본본<br>정식 출간 전 견본입니다</span></div></div>
+            </div>
           </div>
-          <div class="cover">
-            <div class="face front"><div class="cov c1" style="width:100%;height:100%;aspect-ratio:auto;box-shadow:none"><div class="moon"></div><div class="s">Seoseol Press</div><div class="t">겨울의 문장들</div></div></div>
-            <div class="face back"><div><b>서설 출판사</b><span>프리뷰 전시 시험 제본본<br>정식 출간 전 견본입니다</span></div></div>
-          </div>
+          <p class="cap">스크롤하면 표지가 넘어갑니다</p>
         </div>
-        <p class="cap">스크롤하면 표지가 넘어갑니다</p>
       </div>
     </div>
   </div>
@@ -350,7 +467,7 @@ dialog[open]{animation:dlg .5s cubic-bezier(.2,.8,.2,1)}
     <div>
       <p class="kicker">First readers</p>
       <h2 class="rv">첫 독자가 되어 주세요.</h2>
-      <p class="rv">가장 마음에 든 책을 고르면 예약 카드가 만들어집니다. 전시장에서 같은 카드를 받을 수 있고, 가장 많이 선택받은 책부터 인쇄합니다.</p>
+      <p class="rv">가장 마음에 든 책을 고르면 예약 카드가 만들어집니다. 현장에서 같은 카드를 받을 수 있고, 가장 많이 선택받은 책부터 인쇄합니다.</p>
       <form id="form" class="rv">
         <label for="nm">이름 또는 별명
           <input id="nm" name="nm" maxlength="12" placeholder="예: 눈이 좋아" autocomplete="off">
@@ -358,15 +475,15 @@ dialog[open]{animation:dlg .5s cubic-bezier(.2,.8,.2,1)}
         <label for="bk">읽고 싶은 책
           <select id="bk" name="bk"></select>
         </label>
-        <button class="btn fill" type="submit">예약 카드 만들기</button>
+        <button class="btn fill" type="submit">예약 카드 이미지 만들기</button>
       </form>
-      <p class="note">이 화면에서는 카드 모양만 미리 볼 수 있습니다. 실제 예약은 전시장에서 접수합니다.</p>
+      <p class="note">책과 이름을 고르면 옆의 카드가 바로 바뀝니다. 이미지로 저장해 현장에서 보여 주시면 예약이 접수됩니다. 온라인 접수는 아직 받지 않습니다.</p>
     </div>
     <div>
       <div class="ticket" id="ticket" aria-live="polite">
         <div class="top"><span>First Reader</span><span>Seoseol Press</span></div>
         <div><div class="who" id="tWho">첫 독자님</div><div class="bk" id="tBk">《겨울의 문장들》 예약</div></div>
-        <small>서설 프리뷰 전시 · 책이 나오면 가장 먼저 연락드립니다</small>
+        <small>서설 프리뷰 · 책이 나오면 가장 먼저 연락드립니다</small>
         <div class="seal" aria-hidden="true">書雪</div>
       </div>
     </div>
@@ -378,8 +495,8 @@ dialog[open]{animation:dlg .5s cubic-bezier(.2,.8,.2,1)}
     <p class="kicker">Event history</p>
     <h2 class="rv">서설 일지</h2>
     <div class="tl" id="tl">
-      <div class="rv"><div class="when">2026. 12<em>예정</em></div><h3>서설 프리뷰 전시</h3><p>책이 되기 전의 책 네 권을 처음 공개합니다.</p></div>
-      <div class="rv"><div class="when">2027 상반기<em>예정</em></div><h3>첫 책 인쇄</h3><p>전시에서 가장 많이 선택받은 책부터 인쇄합니다.</p></div>
+      <div class="rv"><div class="when">2026. 12<em>예정</em></div><h3>서설 프리뷰</h3><p>책이 되기 전의 책 네 권을 처음 공개합니다.</p></div>
+      <div class="rv"><div class="when">2027 상반기<em>예정</em></div><h3>첫 책 인쇄</h3><p>프리뷰에서 가장 많이 선택받은 책부터 인쇄합니다.</p></div>
       <div class="rv"><div class="when">2027 하반기<em>예정</em></div><h3>신인 작가 원고 모집</h3><p>다음 겨울에 내릴 문장들을 기다립니다.</p></div>
     </div>
   </div>
@@ -389,7 +506,7 @@ dialog[open]{animation:dlg .5s cubic-bezier(.2,.8,.2,1)}
   <div class="wrap">
     <p class="kicker">Submissions</p>
     <p class="big rv">당신의 첫 문장을<br>보내 주세요.</p>
-    <p class="rv" style="margin-top:1.8rem">원고 투고와 전시 협업 문의는 메일로 받습니다. 완성된 원고가 아니어도 괜찮습니다. 첫 장과 쓰고 싶은 이유만 보내 주세요.</p>
+    <p class="rv" style="margin-top:1.8rem">원고 투고와 협업 문의는 메일로 받습니다. 완성된 원고가 아니어도 괜찮습니다. 첫 장과 쓰고 싶은 이유만 보내 주세요.</p>
     <div class="mail rv">
       <code id="mailtxt" data-mail>gwangju.indiepublisher@gmail.com</code>
       <button class="btn" id="copy" type="button">주소 복사</button>
@@ -418,13 +535,20 @@ dialog[open]{animation:dlg .5s cubic-bezier(.2,.8,.2,1)}
   </div>
 </dialog>
 
+<dialog id="cardDlg" aria-labelledby="cdT">
+  <button class="x" id="cdx" aria-label="닫기">×</button>
+  <h3 id="cdT" style="font-size:1.6rem;font-weight:500;margin-bottom:1rem">예약 카드가 만들어졌어요</h3>
+  <img id="cdImg" alt="첫 독자 예약 카드" style="width:100%;height:auto;display:block;box-shadow:0 20px 50px rgba(0,0,0,.5)">
+  <div style="margin-top:1.2rem;display:flex;gap:1rem 1.4rem;flex-wrap:wrap;align-items:center">
+    <a class="btn fill" id="cdDl" download="서설-첫독자-카드.png" href="#">이미지 저장</a>
+    <span style="color:var(--frost);font-size:1rem">저장이 안 되면 이미지를 길게 누르거나 우클릭해서 저장하세요.</span>
+  </div>
+</dialog>
+
 <script>
 document.documentElement.classList.add('js');
-/* 행사·사업자 정보는 여기만 고치면 됩니다 */
-const EVENT = { date:'2026년 12월 · 세부 일정 공개 예정', place:'광주 · 장소 공개 예정' };
+/* 사업자 정보는 여기만 고치면 됩니다 */
 const MAIL = 'gwangju.indiepublisher@gmail.com';
-document.getElementById('evDate').textContent = EVENT.date;
-document.getElementById('evPlace').textContent = EVENT.place;
 document.querySelectorAll('[data-mail]').forEach(e=>e.textContent=MAIL);
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -484,7 +608,7 @@ BOOKS.forEach(b=>{
 /* 흐르는 문장 */
 const line = BOOKS.map(b=>`<span>${b.first}</span><i>●</i>`).join('');
 document.getElementById('track').innerHTML = line+line;
-const big = '<span>PREVIEW EXHIBITION</span><i>●</i><span>프리뷰 전시</span><i>●</i><span>첫 문장이 내리는 겨울</span><i>●</i>';
+const big = '<span>PREVIEW EXHIBITION</span><i>●</i><span>책이 되기 전의 책</span><i>●</i><span>첫 문장이 내리는 겨울</span><i>●</i>';
 document.getElementById('track2').innerHTML = big+big+big;
 
 /* 책 상세 모달 */
@@ -494,7 +618,7 @@ function openBook(b){
   document.getElementById('dGenre').textContent = b.genre;
   document.getElementById('dTitle').textContent = '《'+b.title+'》 (가제)';
   document.getElementById('dDesc').textContent = b.desc;
-  document.getElementById('dState').textContent = '현재 단계 · '+b.state+' · 저자는 전시에서 공개합니다.';
+  document.getElementById('dState').textContent = '현재 단계 · '+b.state+' · 저자는 프리뷰에서 공개합니다.';
   const f = document.getElementById('dFirst'); f.textContent='';
   try{dlg.showModal();}catch(e){dlg.setAttribute('open','')}
   clearInterval(typer); let i=0;
@@ -516,7 +640,38 @@ function updateTicket(pop){
 }
 sel.addEventListener('change',()=>updateTicket(true));
 nmInput.addEventListener('input',()=>updateTicket(false));
-document.getElementById('form').addEventListener('submit',e=>{ e.preventDefault(); updateTicket(true); });
+document.getElementById('form').addEventListener('submit',e=>{ e.preventDefault(); updateTicket(true); makeCard(); });
+const cardDlg=document.getElementById('cardDlg');
+document.getElementById('cdx').onclick=()=>cardDlg.close();
+cardDlg.addEventListener('click',e=>{ if(e.target===cardDlg) cardDlg.close() });
+async function makeCard(){
+  const name=(nmInput.value.trim()||'첫 독자')+' 님';
+  const b=BOOKS.find(x=>x.id==sel.value);
+  try{ await Promise.all([
+    document.fonts.load('500 64px "Noto Serif KR"'),
+    document.fonts.load('italic 400 40px "Cormorant Garamond"'),
+    document.fonts.load('300 30px "IBM Plex Sans KR"')]); }catch(e){}
+  const c=document.createElement('canvas'); c.width=1200; c.height=800;
+  const g=c.getContext('2d');
+  g.fillStyle='#f1ede4'; g.fillRect(0,0,1200,800);
+  g.strokeStyle='rgba(20,24,58,.28)'; g.lineWidth=2; g.strokeRect(28,28,1144,744);
+  g.textBaseline='alphabetic'; g.textAlign='left'; g.fillStyle='#3a4470';
+  g.font='italic 400 46px "Cormorant Garamond",serif'; g.fillText('First Reader',80,124);
+  g.textAlign='right'; g.fillText('Seoseol Press',1120,124); g.textAlign='left';
+  let fs=92; g.fillStyle='#14183a';
+  do{ g.font='500 '+fs+'px "Noto Serif KR",serif'; fs-=4 }while(g.measureText(name).width>820 && fs>40);
+  g.fillText(name,80,410);
+  g.fillStyle='#3a4470'; g.font='400 46px "Noto Serif KR",serif'; g.fillText('《'+b.title+'》 예약',80,490);
+  g.font='300 30px "IBM Plex Sans KR",sans-serif'; g.fillText('서설 프리뷰 · 책이 나오면 가장 먼저 연락드립니다',80,700);
+  g.save(); g.translate(1010,560); g.rotate(-5*Math.PI/180);
+  g.fillStyle='#c63a2f'; g.fillRect(-62,-62,124,124);
+  g.fillStyle='#fff'; g.textAlign='center'; g.font='900 54px "Noto Serif KR",serif';
+  g.fillText('書',0,-6); g.fillText('雪',0,50); g.restore();
+  const url=c.toDataURL('image/png');
+  document.getElementById('cdImg').src=url;
+  document.getElementById('cdDl').href=url;
+  try{cardDlg.showModal()}catch(e){cardDlg.setAttribute('open','')}
+}
 updateTicket(false);
 
 /* 메일 복사 */
@@ -535,7 +690,7 @@ const scrubs = [...document.querySelectorAll('.scrub')].map(el=>{
 
 /* 스크롤 연동: 진행선, 한자 시차, 책 펼침, 단어, 일지 선 */
 const pg=document.getElementById('pg'), hj=document.getElementById('hanja'),
-      book=document.getElementById('book'), expo=document.getElementById('expo'), tl=document.getElementById('tl');
+      book=document.getElementById('book'), expo=document.getElementById('expoGrid'), tl=document.getElementById('tl');
 let bookCur=0, bookTarget=0, raf=0;
 function bookTick(){
   bookCur += (bookTarget-bookCur)*.11;
@@ -568,6 +723,48 @@ document.querySelectorAll('.rv').forEach((el,i)=>{
   if(el.classList.contains('item')) el.style.transitionDelay=(i%4)*.12+'s';
   io.observe(el);
 });
+
+
+/* 배너: 화면에 보일 때만 재생, 마우스에 따라 층이 살짝 움직임 */
+(function(){
+  const art=document.getElementById('bart'); if(!art) return;
+  new IntersectionObserver(en=>art.classList.toggle('play',en[0].isIntersecting),{threshold:.1}).observe(art);
+  /* 스크롤하면 상자가 열린다: 뚜껑이 먼저 옆으로 비키고, 그다음 책이 올라온다 */
+  const sm=t=>t*t*(3-2*t);
+  let cur=0,target=0,raf=0;
+  function apply(o){
+    const lid=sm(clamp((o-.1)/.5,0,1)), bk=sm(clamp((o-.5)/.45,0,1));
+    art.style.setProperty('--o',o.toFixed(4));
+    art.style.setProperty('--lid',lid.toFixed(4));
+    art.style.setProperty('--bk',bk.toFixed(4));
+    art.style.setProperty('--lift',(Math.sin(Math.PI*lid)*48).toFixed(2));
+  }
+  function tick(){
+    cur+=(target-cur)*.1; if(Math.abs(target-cur)<.0008) cur=target;
+    apply(cur); raf = cur===target ? 0 : requestAnimationFrame(tick);
+  }
+  const pinMQ=matchMedia('(min-width:861px) and (min-height:700px)');
+  const pin=document.getElementById('bpin'), ban=document.getElementById('banner');
+  function upd(){
+    let o;
+    if(pinMQ.matches){
+      const r=pin.getBoundingClientRect(), top=parseFloat(getComputedStyle(ban).top)||0, total=r.height-ban.offsetHeight;
+      o=total>0?(top-r.top)/total:0;
+    }else{
+      const r=art.getBoundingClientRect();
+      o=(innerHeight*.85-r.top)/(innerHeight*.9);
+    }
+    target=clamp(o,0,1);
+    if(!raf) raf=requestAnimationFrame(tick);
+  }
+  addEventListener('scroll',upd,{passive:true}); addEventListener('resize',upd); upd();
+  art.addEventListener('pointermove',e=>{
+    const r=art.getBoundingClientRect();
+    art.style.setProperty('--px',((e.clientX-r.left)/r.width-.5).toFixed(3));
+    art.style.setProperty('--py',((e.clientY-r.top)/r.height-.5).toFixed(3));
+  });
+  art.addEventListener('pointerleave',()=>{art.style.setProperty('--px',0);art.style.setProperty('--py',0)});
+})();
 
 /* 커서 빛 */
 const glow=document.getElementById('glow');
